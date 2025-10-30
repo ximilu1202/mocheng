@@ -11,6 +11,11 @@ from dotenv import load_dotenv
 
 env_path = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(dotenv_path=env_path)
+print("🔍 ENV PATH:", env_path)
+print("🔍 Token loaded:", os.getenv("DISCORD_TOKEN"))
+print("🔍 Command prefix:", os.getenv("COMMAND_PREFIX"))
+print("ENV PATH:", env_path)
+print("TOKEN:", os.getenv("DISCORD_TOKEN"))
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 PREFIX = os.getenv("COMMAND_PREFIX", "!")
@@ -22,6 +27,7 @@ logger = logging.getLogger("discord_bot")
 intents = discord.Intents.default()
 intents.message_content = True  # 如果要處理文字內容，需啟用
 intents.members = True  # 若需要成員事件，保留
+intents.presences = False       # 可選，不需要就關掉
 
 bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=commands.DefaultHelpCommand(),
                    description="範例 Discord Bot")
